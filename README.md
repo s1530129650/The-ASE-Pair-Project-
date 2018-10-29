@@ -341,7 +341,7 @@ output is:
 	-------------------
 	Time Consuming:0.448502
 
-### step_2 Use <stop-words> 
+### step_2 Use "stop-words"
 
 We see from the results of the step_1 that in a novel, the words with the highest frequency are generally "the", "and", "to", "of", "a", these words, we don't feel interest. We can make a stop word file (stop word table), skip these words when counting vocabulary. We call this file ```"stopwords.txt"``` file.
 
@@ -389,3 +389,49 @@ output is:
 	--------------------------
 	Time Consuming:0.300346
 As you can see, the words in ```stopwords.txt ``` are ignored during statistics.
+
+### step_3 Count the frequency of frequently used phrases
+
+First define the phrase: "two or more English words, separated by spaces only." See the example below:
+
+	Hello world //this is a phrase
+	Hello, world //this is not a phrase
+
+#### usage
+
+function: Count the frequency of occurrence of commonly used ```number-word ``` phrases
+
+The command line arguments are:
+
+``` WF.exe -f  -p <number>   <file> ```
+
+For examle: number = 3
+
+output is:
+
+	File: F:\ASE\WFCount\ <file>
+	-------------------------------------------------------------------------------------------
+	|                                    The Rank List                                    |
+	|Phrases                                   |Frequency                                 |
+	|she did not                               |0.07%                                     |
+	|she could not                             |0.05%                                     |
+	|there was a                               |0.05%                                     |
+	|out of the                                |0.04%                                     |
+	|for a moment                              |0.04%                                     |
+	|there was no                              |0.03%                                     |
+	|it was a                                  |0.03%                                     |
+	|she had been                              |0.03%                                     |
+	|the first time                            |0.03%                                     |
+	|it would be                               |0.03%                                     |
+	-------------------------------------------------------------------------------------------
+	Time Consuming:1.711970
+This step is also Support  ```-x  stopwords, -d <directory>    and -s <subdirectory>  ```
+
+The command line arguments are:
+
+``` WF.exe -f  -p <number> -x <stopwordfile>  <file> ```
+ 
+``` WF.exe -f  -p <number> -d <directory>```
+
+``` WF.exe -f  -p <number> -d -s  <directory> ```
+ etc
