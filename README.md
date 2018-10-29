@@ -20,7 +20,7 @@ Optional arguments:
   	-s, --subDirFlag      Recurse into sub-directories. Must be used with -d.
 Toggle current directory to```..\WFCount\dist```, you'll see ```WF.exe```, We can run ```WF.exe``` using the command-line arguments above.
 
-##Example:
+## Example:
 
 Taking an example of  counting the frequency of the 26 letters in the ```gone_with_the_wind.txt``` and outputing the 10 with the highest frequency
 
@@ -55,14 +55,14 @@ output:
 
   The result will output the absolute path of the statistics file, the statistical results and the time it takes to process the text.
 
-##Design
+## Design
 
-###step_0 Outputs the frequency of the 26 letters in an English text file
+### step_0 Outputs the frequency of the 26 letters in an English text file
 
 We use python to process the file and output the frequency of letters in an English text file， arranged from high to low, and shows the percentage of letters appearing, accurate to two decimal places.
 If two letters appear at the same frequency, they are arranged in lexicographic order. If both c and b occur at a frequency of 1.2%, then b is to be placed in front of c.
 
-####usage
+#### usage
 
 function: Outputs the frequency of the 26 letters in ```<file name>```,arranged from high to low.
 
@@ -105,13 +105,13 @@ output is:
 	-------------------
 	Time Consuming: xx.xxxxs
 
-###step_1 Outputs the frequency of the 26 letters in an English text file
+### step_1 Outputs the frequency of the 26 letters in an English text file
 
 Role: A console program for counting the frequency of occurrences of English words in text files
 
 Word: A string of English letters and alphanumeric characters that begins with an English letter and is treated as a word. Words are separated by a separator and are not case sensitive. At the time of output, all words are represented in lowercase characters.
 
-#####Note that:
+##### Note that:
 
 English alphabet: A-Z, a-z
 
@@ -119,9 +119,9 @@ Alphanumeric symbols: A-Z, a-z, 0-9
 
 Splitter: space, non-alphanumeric symbol Example: good123 is a word, 123good,g001d23 are not words. Good, Good and GOOD are the same word.
 
-####usage
+#### usage
 
-#####function 1:
+##### function 1:
   
 All non-duplicated words in the output file are sorted by the number of occurrences from more to less, and the same number of occurrences are sorted by dictionary order.
 
@@ -149,7 +149,7 @@ output is:
 	Time Consuming:XX.XXXX s
 By default we list the 10 most frequently occurring words.	
 
-#####function 2:
+##### function 2:
 
 Specify the absolute path or relative path of the file directory and execute ```WF.exe -f <file> ```on each file in the directory. 
 
@@ -209,7 +209,7 @@ output is:
 	Time Consuming:0.033807
 Note: The above is a concrete example, because the file structure is different, the results will be different. By default we list the 10 most frequently occurring words.	
 
-#####function 3:
+##### function 3:
 
 After specifying the file directory, recursively traverse all subdirectories under the directory and perform ```WF.exe -f <file> ```on each file in the directory and its subdirectories.
 
@@ -317,7 +317,7 @@ output is:
 	Time Consuming:0.078827
 Note: The above is also a concrete example, because the files in our directory are different, the results will be different. By default we list the 10 most frequently occurring words.
 	
-#####function 4:
+##### function 4:
 
 Supports the -n parameter, which outputs the first n words with the most occurrences.
 
