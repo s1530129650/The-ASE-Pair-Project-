@@ -1,5 +1,5 @@
 
-title: The ASE Pair Project (MSRA)
+Title: The ASE Pair Project (MSRA)
 ==========================
 
 Word frequency statistics of English words in text, including letters, single words, phrases, verb phrases, etc
@@ -340,3 +340,52 @@ output is:
 	|she      |1.99%    |
 	-------------------
 	Time Consuming:0.448502
+
+### step_2 Use <stop-words> 
+
+We see from the results of the step_1 that in a novel, the words with the highest frequency are generally "the", "and", "to", "of", "a", these words, we don't feel interest. We can make a stop word file (stop word table), skip these words when counting vocabulary. We call this file ```"stopwords.txt"``` file.
+
+#### usage
+
+function: Use <stop-words> as a list of stop words, which are ignored in the counting.
+
+The command line arguments are:
+
+``` WF.exe -x <stopwordfile>  -f <file> ```
+
+For example：
+
+```stopword.txt``` is:
+
+	the
+	and
+	to
+	of
+	a
+	she
+	her
+<file> is gone_with_the_wind.txt
+
+command line is:
+
+```WF.exe -f -x ../stopwords.txt ../gone_with_the_wind.txt```
+
+output is:
+
+	File: F:\ASE\WFCount\gone_with_the_wind.txt
+	--------------------------
+	|      The Rank List      |
+	|words       |Frequency   |
+	|in          |1.42%       |
+	|was         |1.41%       |
+	|i           |1.27%       |
+	|you         |1.24%       |
+	|he          |1.16%       |
+	|that        |1.08%       |
+	|had         |1.06%       |
+	|it          |1.06%       |
+	|s           |0.89%       |
+	|with        |0.78%       |
+	--------------------------
+	Time Consuming:0.300346
+As you can see, the words in ```stopwords.txt ``` are ignored during statistics.
