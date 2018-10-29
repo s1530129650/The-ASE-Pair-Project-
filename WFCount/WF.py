@@ -353,9 +353,9 @@ if __name__ == '__main__':
             CountLetters(args.path, args.topNum, args.stopWord, args.verbDict)
     if args.phraseNum > 0:
         if (args.dirFlag):
-            OperateInDir(CountPhrases, args.path, args.topNum, args.stopWord, args.verbDict, args.subDirFlag)
+            OperateInDir(CountPhrases, args.path, args.topNum, args.stopWord, args.verbDict, args.subDirFlag, args.phraseNum)
         else:
-            CountPhrases(args.path, args.phraseNum,  args.topNum, args.stopWord, args.verbDict)
+            CountPhrases(args.path,  args.topNum, args.stopWord, args.verbDict, args.phraseNum)
     if  args.preList:
         if (args.dirFlag):
             OperateInDir(CountVerbPre, args.path, args.topNum, args.stopWord, args.verbDict, args.subDirFlag)
