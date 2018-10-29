@@ -1,94 +1,97 @@
----
+
 title: The ASE Pair Project (MSRA)
----
+==========================
 
-# Step-0:Output the character frenquency
-How is the 26-letter frequency of English distributed in a novel? What are the words that often appear in a type of article? What is the most commonly used term for a writer? What is the most commonly used phrase in Harry Potter, and so on. We will write some procedures to solve this problem and satisfy our curiosity.
+Word frequency statistics of English words in text, including letters, single words, phrases, verb phrases, etc
+## Usage:
 
-Let's Count the occurrences of 26 characters(a,b,c,...) in a text file.
-##Usage:
-The Arguements
+Optional arguments:
 
-	usage: main.py [-h] [-f F_FILE_NAME] [-c C_FILE_NAME] [-p P_FILE_NAME]
-	               [-q Q_FILE_NAME]
+	-h, --help            show this help message and exit
+	-f, --wordFre         Output word frequencies
+  	-c, --charaFre        Output character frequencies
+  	-p PHRASENUM, --phraseNum PHRASENUM  Output phrase frequencies.
+  	-q PRELIST, --preList PRELIST Count VERB-PREPOSITION pair occurrences.<prepostition-list> is the path to the list of prepositions
+ 	-v VERBDICT, --verbDict VERBDICT This is an verb-dict
+ 	-n TOPNUM, --topNum TOPNUM  Output only the top items
+  	-x STOPWORD, --stopWord STOPWORD  Use <stop-words> as a list of stop words, which are ignored in the counting.
+  	-d, --dirFlag         Treat as the path to a directory and operate on each file inside the directory.
+  	-s, --subDirFlag      Recurse into sub-directories. Must be used with -d.
+Toggle current directory to```..\WFCount\dist```, you'll see ```WF.exe```, We can run ```WF.exe``` using the command-line arguments above.
+##Example:
+Taking an example of  counting the frequency of the 26 letters in the ```gone_with_the_wind.txt``` and outputing the 10 with the highest frequency
+
+current directory:
+
+
+```F:\ASE\WFCount\dist>```
+
+input:
+
+```F:\ASE\WFCount\dist> WF.exe -c -n 10  gone_with_the_wind.txt ```
+
+output:
 	
-	optional arguments:
-	  -h, --help            show this help message and exit
-	  -f F_FILE_NAME, --f_file_name F_FILE_NAME
-	                        Output word frequencies
-	  -c C_FILE_NAME, --c_file_name C_FILE_NAME
-	                        Output character frequencies
-	  -p P_FILE_NAME, --p_file_name P_FILE_NAME
-	                        Output phrase frequencies
-	  -q Q_FILE_NAME, --q_file_name Q_FILE_NAME
-	                        Output PREPOSITION pair frequencies
- Count the occurrences of 26 characters(a,b,c,...) in <file name\>
+	File: F:\ASE\WFCount\dist\gone_with_the_wind.txt
+	-------------------
+	|   The Rank List   |
+	|character|Frequency|
+	|e        |12.70%   |
+	|t        |8.96%    |
+	|a        |8.16%    |
+	|o        |7.30%    |
+	|n        |6.94%    |
+	|h        |6.81%    |
+	|s        |6.32%    |
+	|i        |6.08%    |
+	|r        |5.89%    |
+	|d        |4.82%    |
+	-------------------
+	Time Consuming:0.186575
 
-```
-python mian.py -c <file name>
-```
 
-The output example:
-here we use 'gone with the wind' as an exmaple:
-```
-python mian.py -c gone_with_the_wind.txt
-``` 
+  The result will output the absolute path of the statistics file, the statistical results and the time it takes to process the text.
+##Design
+###step_0 Outputs the frequency of the 26 letters in an English text file
+We use python to process the file and output the frequency of letters in an English text file， arranged from high to low, and shows the percentage of letters appearing, accurate to two decimal places.
+If two letters appear at the same frequency, they are arranged in lexicographic order. If both c and b occur at a frequency of 1.2%, then b is to be placed in front of c.
+####usage
+The command line arguments are:
 
-Then we can get:
+```WF.exe -c <file name>```
 
-	--------------------------
-	|     The rank list      |
-	|   Letter   | Frequency |
-	|          e | 0.13      |
-	|          t | 0.09      |
-	|          a | 0.08      |
-	|          o | 0.07      |
-	|          n | 0.07      |
-	|          h | 0.07      |
-	|          s | 0.06      |
-	|          r | 0.06      |
-	|          i | 0.06      |
-	|          d | 0.05      |
-	|          l | 0.04      |
-	|          u | 0.03      |
-	|          w | 0.02      |
-	|          m | 0.02      |
-	|          g | 0.02      |
-	|          y | 0.02      |
-	|          c | 0.02      |
-	|          f | 0.02      |
-	|          b | 0.01      |
-	|          p | 0.01      |
-	|          k | 0.01      |
-	|          v | 0.01      |
-	|          I | 0.00      |
-	|          S | 0.00      |
-	|          A | 0.00      |
-	|          T | 0.00      |
-	|          M | 0.00      |
-	|          H | 0.00      |
-	|          W | 0.00      |
-	|          B | 0.00      |
-	|          Y | 0.00      |
-	|          C | 0.00      |
-	|          x | 0.00      |
-	|          P | 0.00      |
-	|          O | 0.00      |
-	|          G | 0.00      |
-	|          j | 0.00      |
-	|          R | 0.00      |
-	|          N | 0.00      |
-	|          q | 0.00      |
-	|          E | 0.00      |
-	|          D | 0.00      |
-	|          F | 0.00      |
-	|          z | 0.00      |
-	|          L | 0.00      |
-	|          J | 0.00      |
-	|          U | 0.00      |
-	|          K | 0.00      |
-	|          V | 0.00      |
-	|          X | 0.00      |
-	|          Q | 0.00      |
-	|          Z | 0.00      |
-	--------------------------
+output is:
+
+	File: x/xxx/xx/file name
+	-------------------
+	|   The Rank List   |
+	|character|Frequency|
+	|e        |12.70%   |
+	|t        |8.96%    |
+	|a        |8.16%    |
+	|o        |7.30%    |
+	|n        |6.94%    |
+	|h        |6.81%    |
+	|s        |6.32%    |
+	|i        |6.08%    |
+	|r        |5.89%    |
+	|d        |4.82%    |
+	|l        |4.44%    |
+	|u        |2.80%    |
+	|w        |2.59%    |
+	|m        |2.45%    |
+	|y        |2.21%    |
+	|g        |2.20%    |
+	|c        |2.16%    |
+	|f        |1.99%    |
+	|b        |1.55%    |
+	|p        |1.42%    |
+	|k        |1.03%    |
+	|v        |0.85%    |
+	|j        |0.11%    |
+	|x        |0.10%    |
+	|q        |0.07%    |
+	|z        |0.06%    |
+	-------------------
+	Time Consuming: xx.xxxxs
+###step_1 Outputs the frequency of the 26 letters in an English text file
