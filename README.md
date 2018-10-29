@@ -325,7 +325,7 @@ For example, -n 5 is the top 5of the most frequently occurring words. When there
 
 The command line arguments are:
 
-```wf.exe -f -n  <directory>  ```
+```wf.exe  -n  <top-n>  ```
 
 output is:
 
@@ -351,7 +351,7 @@ function: Use <stop-words> as a list of stop words, which are ignored in the cou
 
 The command line arguments are:
 
-``` WF.exe -x <stopwordfile>  -f <file> ```
+``` WF.exe -x <stopwordfile>   ```
 
 For example：
 
@@ -403,7 +403,7 @@ function: Count the frequency of occurrence of commonly used ```number-word ``` 
 
 The command line arguments are:
 
-``` WF.exe -f  -p <number>   <file> ```
+``` WF.exe -p <number>   ```
 
 For examle: number = 3
 
@@ -435,3 +435,108 @@ The command line arguments are:
 
 ``` WF.exe -f  -p <number> -d -s  <directory> ```
  etc
+
+### step_4 Unified verb form in counting
+
+We want to find commonly used words and phrases, but find that English verbs often change in time and voice, leading to the same word, but the same phrase is considered different.
+Thus,unify the verb form firstly, then count.
+
+Suppose we have a text file in which each line of the file is constructed like this:
+
+Verb prototype ```->``` verb variant 1 verb variant 2...
+
+Words are separated by ```->```.
+
+For example:
+
+	abandon -> abandons,abandoning,abandoned
+	abase -> abases,abasing,abased
+	abate -> abates,abating,abated
+	abbreviate -> abbreviates,abbreviating,abbreviated
+	hawk -> hawks,hawking,hawked
+	hazard -> hazards,hazarding,hazarded
+	head -> heads,heading,headed
+	implant -> implants,implanting,implanted
+	implement -> implements,implementing,implemented
+	implicate -> implicates,implicating,implicated
+	implore -> implores,imploring,implored
+
+
+#### usage
+
+function: There is an option -v that categorizes the various variants of the verb as its prototype.
+
+The command line arguments are:
+
+``` 　WF.exe -v <verb file>   ```
+
+For example:
+
+```WF.exe -f -v ../verbs.txt  ../gone_with_the_wind.txt```
+
+output is:
+
+	File: F:\ASE\WFCount\gone_with_the_wind.txt
+	--------------------------------
+	|         The Rank List         |
+	|words          |Frequency      |
+	|be             |10.72%         |
+	|have           |5.73%          |
+	|do             |1.97%          |
+	|say            |1.58%          |
+	|go             |1.48%          |
+	|know           |1.33%          |
+	|think          |1.17%          |
+	|come           |1.03%          |
+	|like           |0.90%          |
+	|see            |0.88%          |
+	--------------------------------
+	Time Consuming:0.528598
+#### Step 5 (OPTIONAL): Counting "Verb Phrases" (v-siyual)
+
+We'll count only "Verb Phrases", the definition of which is as follows:
+```
+VerbPhrase := Verb + Spaces + Preposition
+Spaces := Space+
+Space := ' ' | '\t' | '\r' | '\n'
+Preposition := <any one from the list of prepositions>
+Verb := <any one in any tense FROM THE DICTIONARY>
+```
+Read the two sections above to get the list of prepositions and the verb dictionary.
+THIS FEATURE IS OPTIONAL.
+
+#### usage
+
+function: counting verb phrases.
+
+The command line arguments are:
+
+``` 　WF.exe -q <preposition-list> -v <verb-dict>  ```
+
+For example:
+
+```WF.exe -q ../prepositions.txt  -v ../verbs.txt  ../gone_with_the_wind.txt```
+
+output is:
+
+	File: F:\ASE\WFCount\gone_with_the_wind.txt
+	----------------------------------------------------
+	|                  The Rank List                  |
+	|VerbPre                 |Frequency               |
+	|go to                   |0.45%                   |
+	|want to                 |0.27%                   |
+	|be in                   |0.25%                   |
+	|think of                |0.23%                   |
+	|try to                  |0.23%                   |
+	|have to                 |0.23%                   |
+	|look at                 |0.17%                   |
+	|come to                 |0.16%                   |
+	|back to                 |0.11%                   |
+	|be as                   |0.11%                   |
+	----------------------------------------------------
+	Time Consuming:1.293661
+## Disclaimer 
+
+This content is a lot of blog from xzou.
+
+This task is the nature of the homework, there is still incomplete please forgive us.
